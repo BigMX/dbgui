@@ -133,6 +133,36 @@ server.route({
 
 server.route({
     method: 'POST',
+    path: '/addUser',
+    handler: function(request, reply){
+        
+        var q="";
+        q+="INSERT INTO users(user_id,username, user_password,full_name,email,address,favorite_garage) VALUES ("
+        q+=request.payload['user_id'];
+        q+=",";
+        q+=request.payload['username'];
+        q+=",";
+        q+=request.payload['user_password'];
+        q+=",";
+        q+=request.payload['full_name'];
+        q+=",";
+        q+=request.payload['email'];
+        q+=",";
+        q+=request.payload['address'];
+        q+=",";
+        q+=request.payload['favorite_garage'];
+        q+=");"
+
+        connection.query(q, function (error, results, fields){
+            if (error)
+                throw error;
+        });
+        reply("Your Repair is Done");
+    }
+});
+
+server.route({
+    method: 'POST',
     path: '/addPart',
     handler: function(request, reply){
         
